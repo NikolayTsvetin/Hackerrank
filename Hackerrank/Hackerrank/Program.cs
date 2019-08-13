@@ -11,9 +11,9 @@ namespace Hackerrank
         static void Main(string[] args)
         {
             List<List<int>> data = new List<List<int>>() { new List<int>() { 11, 2, 4 }, new List<int>() { 4, 5, 6 }, new List<int>() { 10, 8, -12 } };
-            int[] arr = new int[] { -4, 3, -9, 0, 4, 1 };
+            int[] arr = new int[] { 5, 5, 5, 5, 5 };
 
-            Warmup.PlusMinus(arr);
+            Console.WriteLine(Warmup.TimeConversion("07:05:45PM"));
         }
     }
 }
