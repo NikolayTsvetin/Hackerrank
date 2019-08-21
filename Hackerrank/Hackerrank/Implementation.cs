@@ -97,5 +97,79 @@ namespace Hackerrank
 
             return "NO";
         }
+
+        public static int GetTotalX(List<int> a, List<int> b)
+        {
+            List<int> factors = new List<int>();
+            int firstSetBiggestNumber = a.Max();
+            int secondSetSmallestNumber = b.Min();
+            int counter = 0;
+
+            for (int i = Math.Min(firstSetBiggestNumber, secondSetSmallestNumber); i <= Math.Max(firstSetBiggestNumber, secondSetSmallestNumber); i++)
+            {
+                bool factor = true;
+
+                for (int j = 0; j < b.Count; j++)
+                {
+                    if (b[j] % i != 0)
+                    {
+                        factor = false;
+                    } 
+                }
+
+                if (factor)
+                {
+                    factors.Add(i);
+                }
+            }
+
+            for (int f = 0; f < factors.Count; f++)
+            {
+                bool valid = true;
+
+                for (int k = 0; k < a.Count; k++)
+                {
+                    if (factors[f] % a[k] != 0)
+                    {
+                        valid = false;
+                    }
+                }
+
+                if (valid)
+                {
+                    counter++;
+                }
+            }
+
+            return counter;
+        }
+
+        public static int[] BreakingRecords(int[] scores)
+        {
+            int min = scores[0];
+            int max = scores[0];
+            int newMinRecordCounter = 0;
+            int newMaxRecordCounter = 0;
+            int[] result = new int[2];
+
+            for (int i = 1; i < scores.Length; i++)
+            {
+                if (scores[i] < min)
+                {
+                    min = scores[i];
+                    newMinRecordCounter++;
+                }
+                if (scores[i] > max)
+                {
+                    max = scores[i];
+                    newMaxRecordCounter++;
+                }
+            }
+
+            result[0] = newMaxRecordCounter;
+            result[1] = newMinRecordCounter;
+
+            return result;
+        }
     }
 }

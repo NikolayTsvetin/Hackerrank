@@ -11,12 +11,12 @@ namespace Hackerrank
         static void Main(string[] args)
         {
             List<List<int>> data = new List<List<int>>() { new List<int>() { 11, 2, 4 }, new List<int>() { 4, 5, 6 }, new List<int>() { 10, 8, -12 } };
-            int[] arr = new int[] { -2, 2, 1 };
+            int[] arr = new int[] { 10, 5, 20, 20, 4, 5, 2, 25, 1 };
             int[] arr2 = new int[] { 5, -6 };
+            List<int> numbers = new List<int>() { 2, 6 };
+            List<int> numbers2 = new List<int>() { 24, 36 };
 
-            List<int> numbers = new List<int>() { 73, 67, 38, 33 };
-
-            Implementation.CountApplesAndOranges(7, 11, 5, 15, arr, arr2);
+            Implementation.BreakingRecords(arr);
         }
     }
 }
