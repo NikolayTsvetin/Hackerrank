@@ -171,5 +171,78 @@ namespace Hackerrank
 
             return result;
         }
+
+        public static int Birthday(List<int> s, int d, int m)
+        {
+            List<int> chocolateBars = s;
+            int birthDay = d;
+            int birthMonth = m;
+            int counter = 0;
+
+            for (int i = 0; i <= s.Count - birthMonth; i++)
+            {
+                int sum = 0;
+
+                for (int j = i; j < i + birthMonth; j++)
+                {
+                    sum += s[j];
+                }
+
+                if (sum == birthDay)
+                {
+                    counter++;
+                }
+            }
+
+            return counter;
+        }
+
+        public static int DivisibleSumPairs(int n, int k, int[] ar)
+        {
+            int counter = 0;
+
+            for (int i = 0; i < ar.Length; i++)
+            {
+                int currentNumber = ar[i];
+
+                for (int j = i + 1; j < ar.Length; j++)
+                {
+                    if ((currentNumber + ar[j]) % k == 0)
+                    {
+                        counter++;
+                    }
+                }
+            }
+
+            return counter;
+        }
+
+        public static int MigratoryBirds(List<int> arr)
+        {
+            Dictionary<int, int> birdsAndSights = new Dictionary<int, int>();
+
+            for (int i = 0; i < arr.Count; i++)
+            {
+                if (!birdsAndSights.ContainsKey(arr[i]))
+                {
+                    birdsAndSights.Add(arr[i], 1);
+                }
+                else
+                {
+                    birdsAndSights[arr[i]] = birdsAndSights[arr[i]] + 1;
+                }
+            }
+
+            int maxValue = birdsAndSights.Values.Max();
+            IEnumerable<int> keys = birdsAndSights.Keys;
+            IEnumerable<int> x = keys.Where(key => birdsAndSights[key] == maxValue);
+
+            return x.Min();
+        }
+
+        public static string DayOfProgrammer(int year)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
