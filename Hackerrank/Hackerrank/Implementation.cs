@@ -114,7 +114,7 @@ namespace Hackerrank
                     if (b[j] % i != 0)
                     {
                         factor = false;
-                    } 
+                    }
                 }
 
                 if (factor)
@@ -242,7 +242,106 @@ namespace Hackerrank
 
         public static string DayOfProgrammer(int year)
         {
-            throw new NotImplementedException();
+            bool isLeapYear = false;
+            int sum = 0;
+            List<Months> months = new List<Months>()
+            {
+                Months.January, Months.February, Months.March,
+                Months.April, Months.May, Months.June,
+                Months.July, Months.August, Months.September,
+                Months.October, Months.November, Months.December
+            };
+            int fullMonthsCounter = 0;
+            int diff = 0;
+
+            // < 1700 ???
+            if (year <= 1917)
+            {
+                isLeapYear = year % 4 == 0 ? true : false;
+            }
+            else if (year == 1918)
+            {
+                sum = 46;
+                fullMonthsCounter = 2;
+
+                for (int i = 2; i < months.Count; i++)
+                {
+                    if (sum + (int)months[i] > 256)
+                    {
+                        diff = 256 - sum;
+                        sum += diff;
+                        break;
+                    }
+
+                    sum += (int)months[i];
+                    fullMonthsCounter++;
+                }
+
+                string monthsToReturn = (fullMonthsCounter + 1).ToString().Length == 1 ? ("0" + (fullMonthsCounter + 1)).ToString() : (fullMonthsCounter + 1).ToString();
+
+                return $"{diff}.{monthsToReturn}.{year}";
+            }
+            else
+            {
+                isLeapYear = ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) ? true : false;
+            }
+
+            for (int i = 0; i < months.Count; i++)
+            {
+                if (isLeapYear)
+                {
+                    if (months[i] == Months.February)
+                    {
+                        sum += 29;
+                        fullMonthsCounter++;
+                    }
+                    else
+                    {
+                        if (sum + (int)months[i] > 256)
+                        {
+                            diff = 256 - sum;
+                            sum += diff;
+                            break;
+                        }
+
+                        sum += (int)months[i];
+                        fullMonthsCounter++;
+                    }
+                }
+                else
+                {
+                    if (sum + (int)months[i] > 256)
+                    {
+                        diff = 256 - sum;
+                        sum += diff;
+                        break;
+                    }
+
+                    sum += (int)months[i];
+                    fullMonthsCounter++;
+                }
+            }
+
+            Console.WriteLine((int)Months.February);
+            string modifiedMonths = (fullMonthsCounter + 1).ToString().Length == 1 ? ("0" + (fullMonthsCounter + 1)).ToString() : (fullMonthsCounter + 1).ToString();
+
+            return $"{diff}.{modifiedMonths}.{year}";
+        }
+
+        public enum Months
+        {
+            January = 31,
+            February = 28,
+            March = 31,
+            April = 30,
+            May = 31,
+            June = 30,
+            July = 31,
+            August = 31,
+            September = 30,
+            October = 31,
+            November = 30,
+            December = 31
         }
     }
 }

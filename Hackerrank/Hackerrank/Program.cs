@@ -16,7 +16,8 @@ namespace Hackerrank
             List<int> numbers = new List<int>() { 1, 4, 4, 4, 5, 3 };
             List<int> numbers2 = new List<int>() { 24, 36 };
 
-            Implementation.MigratoryBirds(numbers);
+            var result = Implementation.DayOfProgrammer(2000);
+            Console.WriteLine(result);
         }
     }
 }
