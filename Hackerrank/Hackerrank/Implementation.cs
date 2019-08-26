@@ -343,5 +343,66 @@ namespace Hackerrank
             November = 30,
             December = 31
         }
+
+        public static void BonAppetit(List<int> bill, int k, int b)
+        {
+            int indexOfFoodToBeExcluded = k;
+            int paidMoney = b;
+            int wholeSum = bill.Sum();
+            int sumWithoutExcludedFood = 0;
+
+            for (int i = 0; i < bill.Count; i++)
+            {
+                if (i != indexOfFoodToBeExcluded)
+                {
+                    sumWithoutExcludedFood += bill[i];
+                }
+            }
+
+            if (wholeSum / 2 == paidMoney)
+            {
+                Console.WriteLine((wholeSum / 2) - sumWithoutExcludedFood / 2);
+            }
+            else
+            {
+                Console.WriteLine("Bon Appetit");
+            }
+
+        }
+
+        public static int SockMerchant(int n, int[] ar)
+        {
+            int[] socksInStore = ar;
+            Dictionary<int, int> pairsOfSocks = new Dictionary<int, int>();
+            int pairsCounter = 0;
+
+            for (int i = 0; i < socksInStore.Length; i++)
+            {
+                if (!pairsOfSocks.ContainsKey(socksInStore[i]))
+                {
+                    pairsOfSocks.Add(socksInStore[i], 1);
+                }
+                else
+                {
+                    pairsOfSocks[socksInStore[i]] = pairsOfSocks[socksInStore[i]] + 1;
+                }
+            }
+
+            var values = pairsOfSocks.Values;
+
+            foreach (var value in values)
+            {
+                if (value % 2 == 0)
+                {
+                    pairsCounter += (value / 2);
+                }
+                else
+                {
+                    pairsCounter += ((value - 1) / 2);
+                }
+            }
+
+            return pairsCounter;
+        }
     }
 }
