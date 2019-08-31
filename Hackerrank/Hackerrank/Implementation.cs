@@ -473,5 +473,62 @@ namespace Hackerrank
 
             return max;
         }
+
+        public static string CatAndMouse(int x, int y, int z)
+        {
+            int firstCatLocation = x;
+            int secondCatLocation = y;
+            int mouseLocation = z;
+            int firstDifference = Math.Abs(firstCatLocation - mouseLocation);
+            int secondDifference = Math.Abs(secondCatLocation - mouseLocation);
+
+            if (firstDifference < secondDifference)
+            {
+                return "Cat A";
+            }
+            else if (secondDifference < firstDifference)
+            {
+                return "Cat B";
+            }
+            else
+            {
+                return "Mouse C";
+            }
+        }
+
+        public static int PickingNumbers(List<int> a)
+        {
+            int maxNumber = 0;
+
+            for (int i = 0; i < a.Count; i++)
+            {
+                int currentNumber = a[i];
+                var suitableNumbers = a.Where(number => currentNumber >= number && currentNumber - number <= 1);
+                var secondOptionSuitableNumbers = a.Where(number => number >= currentNumber && number - currentNumber <= 1);
+                var chosenOption = Math.Max(suitableNumbers.Count(), secondOptionSuitableNumbers.Count());
+
+                if (chosenOption > maxNumber)
+                {
+                    maxNumber = suitableNumbers.Count();
+                }
+            }
+
+            return maxNumber;
+        }
+
+        public static int HurdleRace(int k, int[] height)
+        {
+            int heightJump = k;
+            int maxHeight = height.Max();
+
+            if (heightJump < maxHeight)
+            {
+                return maxHeight - heightJump;
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 }
