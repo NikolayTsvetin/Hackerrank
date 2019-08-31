@@ -404,5 +404,74 @@ namespace Hackerrank
 
             return pairsCounter;
         }
+
+        public static int PageCount(int n, int p)
+        {
+            int numbersOfPagesInBook = n;
+            int searchedPage = p;
+
+            return Math.Min(searchedPage / 2, numbersOfPagesInBook / 2 - searchedPage / 2);
+        }
+
+        public static int CountingValleys(int n, string s)
+        {
+            int startingHeight = 0;
+            bool inValley = false;
+            int counter = 0;
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                char currentPosition = s[i];
+
+                if (currentPosition == 'U')
+                {
+                    startingHeight++;
+                }
+                else
+                {
+                    startingHeight--;
+                }
+
+                if (startingHeight < 0)
+                {
+                    inValley = true;
+                }
+
+                if (inValley && startingHeight >= 0)
+                {
+                    inValley = false;
+                    counter++;
+                }
+            }
+
+            return counter;
+        }
+
+        public static int GetMoneySpent(int[] keyboards, int[] drives, int b)
+        {
+            int moneyToSpend = b;
+            int max = -1;
+
+            for (int i = 0; i < keyboards.Length; i++)
+            {
+                int currentKeyboardPrice = keyboards[i];
+                var possiblePairs = drives.Select(item => item + currentKeyboardPrice);
+                var pairsFittingPrice = possiblePairs.Where(item => item <= moneyToSpend);
+                
+                if (pairsFittingPrice.Count() <= 0)
+                {
+                    continue;
+                }
+
+                var maxPriceForPair = pairsFittingPrice.Max();
+
+                if (maxPriceForPair > max)
+                {
+                    max = maxPriceForPair;
+                }
+            }
+
+            return max;
+        }
     }
 }
