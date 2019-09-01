@@ -457,7 +457,7 @@ namespace Hackerrank
                 int currentKeyboardPrice = keyboards[i];
                 var possiblePairs = drives.Select(item => item + currentKeyboardPrice);
                 var pairsFittingPrice = possiblePairs.Where(item => item <= moneyToSpend);
-                
+
                 if (pairsFittingPrice.Count() <= 0)
                 {
                     continue;
@@ -529,6 +529,115 @@ namespace Hackerrank
             {
                 return 0;
             }
+        }
+
+        public static int DesignerPdfViewer(int[] h, string word)
+        {
+            int highestLetter = 0;
+            char[] alphabet = new char[]
+            {
+                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k','l', 'm',
+                'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+            };
+
+            for (int i = 0; i < word.Length; i++)
+            {
+                int index = Array.IndexOf(alphabet, word[i]);
+
+                if (h[index] > highestLetter)
+                {
+                    highestLetter = h[index];
+                }
+            }
+
+            return highestLetter * word.Length;
+        }
+
+        public static int UtopianTree(int n)
+        {
+            int initialHeight = 1;
+            bool isSpring = true;
+            bool isSummer = false;
+
+            for (int i = 0; i < n; i++)
+            {
+                if (isSpring)
+                {
+                    isSpring = false;
+                    initialHeight *= 2;
+
+                    isSummer = true;
+                    continue;
+                }
+
+                if (isSummer)
+                {
+                    isSummer = false;
+                    initialHeight += 1;
+
+                    isSpring = true;
+                    continue;
+                }
+            }
+
+            return initialHeight;
+        }
+
+        public static string AngryProfessor(int k, int[] a)
+        {
+            int numberOfStudentsForClassToStart = k;
+            int counter = 0;
+
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (a[i] <= 0)
+                {
+                    counter++;
+                }
+            }
+
+            if (counter < numberOfStudentsForClassToStart)
+            {
+                return "YES";
+            }
+            else
+            {
+                return "NO";
+            }
+        }
+
+        public static int BeautifulDays(int i, int j, int k)
+        {
+            int startingDay = i;
+            int endingDay = j;
+            int divisor = k;
+            int beautifulDaysCounter = 0;
+
+            for (int counter = startingDay; counter <= endingDay; counter++)
+            {
+                string reversedCurrentNumber = ReverseNumber(counter);
+                int parsedToIntReversedNumber = Int32.Parse(reversedCurrentNumber);
+
+                if (Math.Abs(counter - parsedToIntReversedNumber) % divisor == 0)
+                {
+                    beautifulDaysCounter++;
+                }
+            }
+
+            return beautifulDaysCounter;
+        }
+
+        private static string ReverseNumber(int number)
+        {
+            string numberAsString = number.ToString();
+            StringBuilder reversedNumber = new StringBuilder();
+
+            for (int i = numberAsString.Length - 1; i >= 0; i--)
+            {
+                reversedNumber.Append(numberAsString[i]);
+            }
+
+            return reversedNumber.ToString();
         }
     }
 }

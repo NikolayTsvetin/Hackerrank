@@ -17,6 +17,8 @@ namespace Hackerrank
             List<int> numbers2 = new List<int>() { 5, 2, 8 };
 
             Implementation.HurdleRace(4, arr);
+
+            Implementation.ReverseNumber(120);
         }
     }
 }
