@@ -639,5 +639,65 @@ namespace Hackerrank
 
             return reversedNumber.ToString();
         }
+
+        public static int ViralAdvertising(int n)
+        {
+            int initialPeopleGiven = 5;
+            int peopleSharedWith = initialPeopleGiven;
+            int peopleWhoLiked = initialPeopleGiven / 2;
+            int total = peopleWhoLiked;
+
+            for (int i = 2; i <= n; i++)
+            {
+                peopleSharedWith = peopleWhoLiked * 3;
+
+                int newLikes = peopleSharedWith / 2;
+                total += newLikes;
+
+                peopleWhoLiked = newLikes;
+            }
+
+            return total;
+        }
+
+        public static int SaveThePrisoner(int n, int m, int s)
+        {
+            throw new NotImplementedException("fuck this task");
+        }
+
+        public static int[] CircularArrayRotation(int[] a, int k, int[] queries)
+        {
+            int[] numbersArray = a;
+            int timesToRotate = k;
+            int[] indicesToReturn = queries;
+
+            int[] rotatedArray = new int[numbersArray.Length];
+
+            for (int i = 0; i < numbersArray.Length; i++)
+            {
+                int currentElement = numbersArray[i];
+                int indexToBePlaced = i + timesToRotate;
+
+                if (indexToBePlaced < numbersArray.Length)
+                {
+                    rotatedArray[indexToBePlaced] = currentElement;
+                }
+                else
+                {
+                    indexToBePlaced = indexToBePlaced % numbersArray.Length;
+                    rotatedArray[indexToBePlaced] = currentElement;
+                }
+            }
+
+            int[] returnIndices = new int[indicesToReturn.Length];
+
+            for (int i = 0; i < indicesToReturn.Length; i++)
+            {
+                int wantedIndex = indicesToReturn[i];
+                returnIndices[i] = rotatedArray[wantedIndex];
+            }
+
+            return returnIndices;
+        }
     }
 }
