@@ -699,5 +699,24 @@ namespace Hackerrank
 
             return returnIndices;
         }
+
+        public static int[] PermutationEquation(int[] p)
+        {
+            // Extremely, extremely dumb task!!! Nothing logical here, please dont try it.
+            // Counting starts from 1. Then you find index and start counting from 1 again. Then again. Awful.
+            int[] numbers = p;
+            int[] result = new int[numbers.Length];
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                int x = i + 1;
+                int index = Array.IndexOf(numbers, x) + 1;
+                int secondIndex = Array.IndexOf(numbers, index);
+
+                result[i] = secondIndex + 1;
+            }
+
+            return result;
+        }
     }
 }
