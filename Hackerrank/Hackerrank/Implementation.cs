@@ -718,5 +718,69 @@ namespace Hackerrank
 
             return result;
         }
+
+        public static int JumpingOnClouds(int[] c, int k)
+        {
+            int startingEnergy = 100;
+            int jumpSize = k;
+            int[] clouds = c;
+            int i = 0;
+
+            while (true)
+            {
+                int nextCloud = clouds[(i + jumpSize) % clouds.Length];
+                i = (i + jumpSize) % clouds.Length;
+
+                startingEnergy -= 1;
+
+                if (c[i] == 1)
+                {
+                    startingEnergy -= 2;
+                }
+
+                if (i == 0)
+                {
+                    break;
+                }
+            }
+
+            return startingEnergy;
+        }
+
+        public static int EqualizeArray(int[] arr)
+        {
+            Dictionary<int, int> numbersHolder = new Dictionary<int, int>();
+            int maxNumber = -1;
+            int keyHolder = -1;
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (!numbersHolder.ContainsKey(arr[i]))
+                {
+                    numbersHolder.Add(arr[i], 1);
+                }
+                else
+                {
+                    numbersHolder[arr[i]] = numbersHolder[arr[i]] + 1;
+                }
+            }
+
+            var keys = numbersHolder.Keys;
+
+            foreach (var key in keys)
+            {
+                int count = numbersHolder[key];
+
+                if (count > maxNumber)
+                {
+                    maxNumber = count;
+                    keyHolder = key;
+                }
+            }
+
+            var numbersToBeRemoved = arr.Where(number => number != keyHolder);
+
+            return numbersToBeRemoved.Count();
+        }
     }
 }
