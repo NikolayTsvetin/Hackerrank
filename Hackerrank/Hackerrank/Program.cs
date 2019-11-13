@@ -15,8 +15,9 @@ namespace Hackerrank
             int[] arr2 = new int[] { 0, 1, 2 };
             List<int> numbers = new List<int>() { 4, 6, 5, 3, 3, 1 };
             List<int> numbers2 = new List<int>() { 5, 2, 8 };
+            string[] topics = new string[] { "10101", "11110", "00010" };
 
-            Implementation.EqualizeArray(arr);
+            Implementation.TaumBday(7, 7, 4, 2, 1);
         }
     }
 }

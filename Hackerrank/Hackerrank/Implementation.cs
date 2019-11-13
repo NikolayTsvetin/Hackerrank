@@ -782,5 +782,64 @@ namespace Hackerrank
 
             return numbersToBeRemoved.Count();
         }
+
+        public static int[] AcmTeam(string[] topic)
+        {
+            int fullNumberOfTopics = topic[0].Length;
+            int maxTopics = 0;
+            int teamsWithMaxTopics = 0;
+            int[] result = new int[2];
+
+            for (int i = 0; i < topic.Length; i++)
+            {
+                var currentParticipant = topic[i];
+
+                for (int j = i + 1; j < topic.Length; j++)
+                {
+                    var otherParticipant = topic[j];
+                    int topicsCounter = 0;
+
+                    for (int t = 0; t < fullNumberOfTopics; t++)
+                    {
+                        if (currentParticipant[t] == '1' || otherParticipant[t] == '1')
+                        {
+                            topicsCounter++;
+                        }
+                    }
+
+                    if (topicsCounter > maxTopics)
+                    {
+                        maxTopics = topicsCounter;
+                        teamsWithMaxTopics = 1;
+                    }
+                    else if (topicsCounter == maxTopics)
+                    {
+                        teamsWithMaxTopics++;
+                    }
+                }
+            }
+
+            result[0] = maxTopics;
+            result[1] = teamsWithMaxTopics;
+
+            return result;
+        }
+
+        public static long TaumBday(long b, long w, long bc, long wc, long z)
+        {
+            long numberOfBlackGiftsToBeBought = b;
+            long numberOfWhiteGiftsToBeBought = w;
+            long costOfBlackGift = bc;
+            long costOfWhiteGift = wc;
+            long costOfConvertingColors = z;
+            long result = 0;
+
+            costOfBlackGift = Math.Min(bc, wc + z);
+            costOfWhiteGift = Math.Min(wc, bc + z);
+
+            result = numberOfBlackGiftsToBeBought * costOfBlackGift + numberOfWhiteGiftsToBeBought * costOfWhiteGift;
+
+            return result;
+        }
     }
 }
