@@ -975,5 +975,29 @@ namespace Hackerrank
 
             return counter;
         }
+
+        public static int ChocolateFeast(int n, int c, int m)
+        {
+            int startingMoney = n;
+            int price = c;
+            int numberOfWrappersToTurnForNewBar = m;
+            int counter = 0;
+            int availableWrappers = 0;
+
+            int firstBought = startingMoney / price;
+            counter = firstBought;
+            availableWrappers = counter;
+            startingMoney %= price;
+
+            while (availableWrappers >= numberOfWrappersToTurnForNewBar)
+            {
+                int bought = availableWrappers / numberOfWrappersToTurnForNewBar;
+                availableWrappers %= numberOfWrappersToTurnForNewBar;
+                counter += bought;
+                availableWrappers += bought;
+            }
+
+            return counter;
+        }
     }
 }
