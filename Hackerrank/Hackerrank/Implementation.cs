@@ -841,5 +841,139 @@ namespace Hackerrank
 
             return result;
         }
+
+        public static void KaprekarNumbers(int p, int q)
+        {
+            string result = "";
+
+            for (int i = p; i <= q; i++)
+            {
+                string squaredNumber = Math.Pow(i, 2).ToString();
+                int numberLength = i.ToString().Length;
+                string leftPart = "";
+                string rightPart = "";
+                int leftPartLength = squaredNumber.Length - numberLength;
+
+                leftPart = squaredNumber.Substring(0, leftPartLength);
+                rightPart = squaredNumber.Substring(leftPartLength);
+
+                if (leftPart == "")
+                {
+                    if (i == int.Parse(rightPart))
+                    {
+                        result += $"{i} ";
+                    }
+                }
+                else
+                {
+                    if (i == int.Parse(leftPart) + int.Parse(rightPart))
+                    {
+                        result += $"{i} ";
+                    }
+                }
+            }
+
+            if (String.IsNullOrEmpty(result))
+            {
+                Console.WriteLine("INVALID RANGE");
+            }
+            else
+            {
+
+                Console.WriteLine(result);
+            }
+        }
+
+        public static int BeautifulTriplets(int d, int[] arr)
+        {
+            int counter = 0;
+
+            for (int i = 1; i < arr.Length - 1; i++)
+            {
+                int currentNumber = arr[i];
+
+                for (int j = 0; j < i; j++)
+                {
+                    if (currentNumber - arr[j] == d)
+                    {
+                        for (int k = i + 1; k < arr.Length; k++)
+                        {
+                            if (arr[k] - currentNumber == d)
+                            {
+                                counter++;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return counter;
+        }
+
+        public static int MinimumDistances(int[] a)
+        {
+            int minimumDistance = Int32.MaxValue;
+
+            for (int i = 0; i < a.Length; i++)
+            {
+                int currentElement = a[i];
+
+                for (int j = i + 1; j < a.Length; j++)
+                {
+                    if (a[j] == currentElement)
+                    {
+                        if (Math.Abs(i - j) < minimumDistance)
+                        {
+                            minimumDistance = Math.Abs(i - j);
+                        }
+                    }
+                }
+            }
+
+            if (minimumDistance == Int32.MaxValue)
+            {
+                return -1;
+            }
+
+            return minimumDistance;
+        }
+
+        public static int HowManyGames(int p, int d, int m, int s)
+        {
+            int startingPrice = p;
+            int dollarsDiscount = d;
+            int border = m;
+            int money = s;
+            int counter = 0;
+
+            if (money < startingPrice)
+            {
+                return counter;
+            }
+
+            money -= startingPrice;
+            startingPrice -= dollarsDiscount;
+            counter++;
+
+            while (startingPrice >= border && money >= startingPrice)
+            {
+                money -= startingPrice;
+                startingPrice -= dollarsDiscount;
+                counter++;
+            }
+
+            if (startingPrice < border)
+            {
+                startingPrice = border;
+            }
+
+            while (money >= startingPrice)
+            {
+                money -= border;
+                counter++;
+            }
+
+            return counter;
+        }
     }
 }
