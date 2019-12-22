@@ -999,5 +999,209 @@ namespace Hackerrank
 
             return counter;
         }
+
+        public static int[] ServiceLane(int n, int[][] cases, int[] width)
+        {
+            int[] result = new int[cases.Length];
+
+            for (int i = 0; i < cases.Length; i++)
+            {
+                int[] currentCase = cases[i];
+                int start = currentCase[0];
+                int end = currentCase[1];
+
+                int min = width[start];
+                for (int j = start + 1; j <= end; j++)
+                {
+                    if (width[j] < min)
+                    {
+                        min = width[j];
+                    }
+                }
+
+                result[i] = min;
+            }
+
+            return result;
+        }
+
+        public static int Workbook(int n, int k, int[] arr)
+        {
+            int chapters = n;
+            int maximumProblemsOnPage = k;
+            int counter = 0;
+            int currentPage = 1;
+
+            for (int i = 1; i <= chapters; i++)
+            {
+                int numberOfProblemsOnCurrentChapter = arr[i - 1];
+
+                for (int j = 1; j <= numberOfProblemsOnCurrentChapter; j++)
+                {
+                    int problemNumber = j;
+
+                    if (j == currentPage)
+                    {
+                        counter++;
+                    }
+                    if (problemNumber % maximumProblemsOnPage == 0 || problemNumber == numberOfProblemsOnCurrentChapter)
+                    {
+                        currentPage++;
+                    }
+                }
+            }
+
+            return counter;
+        }
+
+        // Solution from comments.
+        public static int FlatlandSpaceStations_V2(int n, int[] c)
+        {
+            int numberOfCities = n;
+            int[] arrayWithCitiesWithStations = c;
+
+            Array.Sort(arrayWithCitiesWithStations);
+            int maxLength = arrayWithCitiesWithStations[0];
+
+            for (int i = 1; i < arrayWithCitiesWithStations.Length; i++)
+            {
+                int distance = (arrayWithCitiesWithStations[i] - arrayWithCitiesWithStations[i - 1]) / 2;
+
+                if (distance > maxLength)
+                {
+                    maxLength = distance;
+                }
+            }
+
+            int lastSpaceStation = numberOfCities - 1 - arrayWithCitiesWithStations[arrayWithCitiesWithStations.Length - 1];
+
+            if (lastSpaceStation > maxLength)
+            {
+                maxLength = lastSpaceStation;
+            }
+
+            return maxLength;
+        }
+
+        // Fails one test due to timeout.
+        public static int FlatlandSpaceStations(int n, int[] c)
+        {
+            int numberOfCities = n;
+            int[] arrayWithCitiesWithStations = c;
+            int maxLength = -1;
+
+            for (int i = 0; i < numberOfCities; i++)
+            {
+                int currentCity = i;
+                int nearestStation = _FindNearestSpaceStation(arrayWithCitiesWithStations, currentCity);
+
+                if (Math.Abs(currentCity - nearestStation) > maxLength)
+                {
+                    maxLength = Math.Abs(currentCity - nearestStation);
+                }
+            }
+
+            return maxLength;
+        }
+
+        private static int _FindNearestSpaceStation(int[] arrayWithCitiesWithStations, int currentCity)
+        {
+            int nearest = Int32.MaxValue;
+
+            for (int i = 0; i < arrayWithCitiesWithStations.Length; i++)
+            {
+                if (Math.Abs(arrayWithCitiesWithStations[i] - currentCity) < Math.Abs(currentCity - nearest))
+                {
+                    nearest = arrayWithCitiesWithStations[i];
+                }
+            }
+
+            return nearest;
+        }
+
+        // In order solution to be valid in hackerrank - the cases where you should just print "NO" - return -1 and change the checkings in hackerrank if the result is -1 to be interpretated as "NO". Discussed by other people in the comments.
+        public static int FairRations(int[] B)
+        {
+            int sum = 0;
+            int counter = 0;
+
+            for (int i = 0; i < B.Length; i++)
+            {
+                sum += B[i];
+            }
+
+            if (sum % 2 != 0)
+            {
+                Console.WriteLine("NO");
+
+                return -1;
+            }
+
+            for (int i = 0; i < B.Length - 1; i++)
+            {
+                if (i == B.Length - 1)
+                {
+                    if (B[B.Length - 1] % 2 == 0)
+                    {
+                        Console.WriteLine(counter);
+
+                        return counter;
+                    }
+                    else
+                    {
+                        Console.WriteLine("NO");
+
+                        return -1;
+                    }
+                }
+                else
+                {
+                    if (B[i] % 2 != 0)
+                    {
+                        B[i] = B[i] + 1;
+                        B[i + 1] = B[i + 1] + 1;
+
+                        counter += 2;
+                    }
+                }
+            }
+
+            return counter;
+        }
+
+        // Should be matrix. Dont know why it is not.
+        public static string[] CavityMap(string[] grid)
+        {
+            string[] modified = grid;
+
+            for (int i = 1; i < modified.Length - 1; i++)
+            {
+                string currentCell = modified[i];
+                string rowAbove = modified[i - 1];
+                string rowBelow = modified[i + 1];
+
+                for (int j = 1; j < currentCell.Length - 1; j++)
+                {
+                    if (currentCell[j - 1] == 'X' || currentCell[j + 1] == 'X' || rowAbove[j] == 'X' || rowBelow[j] == 'X')
+                    {
+                        continue;
+                    }
+
+                    if (Int32.Parse(currentCell[j].ToString()) > Int32.Parse(currentCell[j - 1].ToString())
+                        && Int32.Parse(currentCell[j].ToString()) > Int32.Parse(currentCell[j + 1].ToString())
+                        && Int32.Parse(currentCell[j].ToString()) > Int32.Parse(rowAbove[j].ToString())
+                        && Int32.Parse(currentCell[j].ToString()) > Int32.Parse(rowBelow[j].ToString()))
+                    {
+                        StringBuilder sb = new StringBuilder(currentCell);
+                        sb[j] = 'X';
+                        currentCell = sb.ToString();
+                    }
+                }
+
+                modified[i] = currentCell;
+            }
+
+            return modified;
+        }
     }
 }
