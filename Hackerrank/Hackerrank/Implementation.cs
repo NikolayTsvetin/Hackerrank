@@ -1203,5 +1203,45 @@ namespace Hackerrank
 
             return modified;
         }
+
+        public static int[] Stones(int n, int a, int b)
+        {
+            // CREDITS:
+            // Developed by Venislav Venkov. Check him on Linkedin.
+            int numberOfStones = n;
+            int min = Math.Min(a, b);
+            int max = Math.Max(a, b);
+
+            int[] result = new int[numberOfStones];
+            int diff = max - min;
+            result[0] = (n - 1) * min;
+
+            for (int i = 1; i < result.Length; i++)
+            {
+                result[i] = result[0] + diff * i;
+            }
+
+            return result.Distinct().ToArray();
+        }
+
+        public static long StrangeCounter(long t)
+        {
+            // CREDITS:
+            // Code optimization by Venislav Venkov. Check him on Linkedin.
+            long initialNumber = 3;
+            long counter = initialNumber;
+            long i = 0;
+
+            while (initialNumber * (Math.Pow(2, i + 1) - 1) < t)
+            {
+                i++;
+            }
+
+            // left and right side are the left and right side from the equation in our white list used to come with this solution.
+            long leftSide = initialNumber * (long)(Math.Pow(2, i) - 1) + 1;
+            long rightSide = initialNumber * (long)Math.Pow(2, i);
+
+            return (leftSide + rightSide - t);
+        }
     }
 }
