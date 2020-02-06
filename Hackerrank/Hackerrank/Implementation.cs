@@ -1243,5 +1243,71 @@ namespace Hackerrank
 
             return (leftSide + rightSide - t);
         }
+
+        // dumb task. delete it pls
+        public static string HappyLadybugs(string b)
+        {
+            if (b.Length == 1 && b[0] != '_')
+            {
+                return "NO";
+            }
+            if (b.IndexOf('_') >= 0)
+            {
+                Dictionary<char, int> letters = new Dictionary<char, int>();
+
+                for (int i = 0; i < b.Length; i++)
+                {
+                    if (!letters.ContainsKey(b[i]))
+                    {
+                        letters[b[i]] = 1;
+                    }
+                    else
+                    {
+                        letters[b[i]] = letters[b[i]] + 1;
+                    }
+                }
+
+                var keys = letters.Keys;
+
+                foreach (var key in keys)
+                {
+                    if (letters[key] == 1 && key != '_')
+                    {
+                        return "NO";
+                    }
+                }
+
+                return "YES";
+            }
+            else
+            {
+                for (int i = 1; i < b.Length; i++)
+                {
+                    if (i == b.Length - 1)
+                    {
+                        if (b[i - 1] == b[i])
+                        {
+                            // happy
+                        }
+                        else
+                        {
+                            return "NO";
+                        }
+                    }
+                    else
+                    {
+                        if (b[i - 1] == b[i] || b[i] == b[i + 1])
+                        {
+                            // happy
+                        }
+                        else
+                        {
+                            return "NO";
+                        }
+                    }
+                }
+                return "YES";
+            }
+        }
     }
 }

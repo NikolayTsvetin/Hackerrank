@@ -17,7 +17,7 @@ namespace Hackerrank
             List<int> numbers2 = new List<int>() { 5, 2, 8 };
             string[] topics = new string[] { "1112", "1912", "1892", "1234" };
 
-            Implementation.Stones(5, 2, 2);
+            StringCategory.MinimumNumber(12, "AUzs-nV");
         }
     }
 }
