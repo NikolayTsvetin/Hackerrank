@@ -86,5 +86,108 @@ namespace Hackerrank
 
             return counter;
         }
+
+        public static int MarsExploration(string s)
+        {
+            int errors = 0;
+            const string Sos = "SOS";
+
+            for (int i = 0; i < s.Length - (Sos.Length - 1); i += Sos.Length)
+            {
+                StringBuilder word = new StringBuilder();
+
+                word.Append(s[i]);
+                word.Append(s[i + 1]);
+                word.Append(s[i + 2]);
+
+                for (int j = 0; j < word.Length; j++)
+                {
+                    if (word[j] != Sos[j])
+                    {
+                        errors++;
+                    }
+                }
+            }
+
+            return errors;
+        }
+
+        public static string HackerrankInString(string s)
+        {
+            s = s.ToLower();
+            const string Hackerrank = "hackerrank";
+
+            if (s.Length < Hackerrank.Length)
+            {
+                return "NO";
+            }
+
+            StringBuilder result = new StringBuilder();
+            int index = 0;
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (index < Hackerrank.Length && s[i] == Hackerrank[index])
+                {
+                    result.Append(s[i]);
+                    index++;
+                }
+            }
+
+            if (result.ToString() == Hackerrank)
+            {
+                return "YES";
+            }
+
+            return "NO";
+        }
+
+        public static string Pangrams(string s)
+        {
+            s = s.ToLower();
+            var letters = new HashSet<char>();
+            var allLetters = "qwertyuiopasdfghjklzxcvbnm".ToList();
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                if ((int)s[i] >= 97 && (int)s[i] <= 122)
+                {
+                    if (!letters.Contains(s[i]))
+                    {
+                        letters.Add(s[i]);
+                    }
+                }
+            }
+
+            int lettersCount = letters.Count;
+
+            if (lettersCount == allLetters.Count)
+            {
+                return "pangram";
+            }
+
+            return "not pangram";
+        }
+
+        public static string FunnyString(string s)
+        {
+            string normalString = s;
+
+            char[] charArray = s.ToCharArray();
+            Array.Reverse(charArray);
+            string reversedString = new string(charArray);
+
+            for (int i = 0; i < s.Length - 1; i++)
+            {
+                int normalStringDiff = Math.Abs(s[i] - s[i + 1]);
+                int reversedStringDiff = Math.Abs(reversedString[i] - reversedString[i + 1]);
+
+                if (normalStringDiff != reversedStringDiff)
+                {
+                    return "Not Funny";
+                }
+            }
+
+            return "Funny";
+        }
     }
 }
