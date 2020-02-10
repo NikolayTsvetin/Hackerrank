@@ -364,5 +364,58 @@ namespace Hackerrank
 
             return true;
         }
+
+        public static int Anagram(string s)
+        {
+            if (s.Length % 2 != 0)
+            {
+                return -1;
+            }
+
+            int counter = 0;
+            string leftHalf = s.Substring(0, s.Length / 2);
+            string rightHalf = s.Substring(s.Length / 2);
+            List<char> lettersInLeftHalf = new List<char>();
+            List<char> lettersInRightHalf = new List<char>();
+
+            lettersInLeftHalf.AddRange(leftHalf);
+            lettersInRightHalf.AddRange(rightHalf);
+
+            for (int i = 0; i < lettersInLeftHalf.Count; i++)
+            {
+                char currentLetter = lettersInLeftHalf[i];
+                int indexInRightHalf = lettersInRightHalf.IndexOf(currentLetter);
+
+                if (indexInRightHalf < 0)
+                {
+                    counter++;
+                }
+                else
+                {
+                    lettersInRightHalf.RemoveAt(indexInRightHalf);
+                }
+            }
+
+            return counter;
+        }
+
+        public static string TwoStrings(string s1, string s2)
+        {
+            char[] letters = "qwertyuiopasdfghjklzxcvbnm".ToCharArray();
+
+            for (int i = 0; i < letters.Length; i++)
+            {
+                char currentChar = letters[i];
+                int indexInFirstString = s1.IndexOf(currentChar);
+                int indexInSecondString = s2.IndexOf(currentChar);
+
+                if (indexInFirstString >= 0 && indexInSecondString >= 0)
+                {
+                    return "YES";
+                }
+            }
+
+            return "NO";
+        }
     }
 }
