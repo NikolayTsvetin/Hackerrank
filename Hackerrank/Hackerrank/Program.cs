@@ -15,9 +15,9 @@ namespace Hackerrank
             int[] arr2 = new int[] { 3, 1, 2 };
             List<int> numbers = new List<int>() { 2, 2, 3, 4, 5 };
             List<int> numbers2 = new List<int>() { 5, 2, 8 };
-            string[] topics = new string[] { "1112", "1912", "1892", "1234" };
+            string[] topics = new string[] { "abcdde", "baccd", "eeabg" };
 
-            StringCategory.Pangrams("We promptly judged antique ivory buckles for the prize");
+            StringCategory.PalindromeIndex("hgygsvlfcwnswtuhmyaljkqlqjjqlqkjlaymhutwsnwcwflvsgygh");
         }
     }
 }

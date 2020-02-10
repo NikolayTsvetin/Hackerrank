@@ -189,5 +189,180 @@ namespace Hackerrank
 
             return "Funny";
         }
+
+        public static int Gemstones(string[] arr)
+        {
+            int numberOfStones = arr.Length;
+            int gemstones = 0;
+            Dictionary<char, int> typesOfStones = new Dictionary<char, int>();
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                var currentStone = arr[i];
+                var distinctChars = currentStone.Distinct();
+
+                foreach (var c in distinctChars)
+                {
+                    if (!typesOfStones.ContainsKey(c))
+                    {
+                        typesOfStones.Add(c, 1);
+                    }
+                    else
+                    {
+                        typesOfStones[c] = typesOfStones[c] + 1;
+                    }
+                }
+            }
+
+            var keys = typesOfStones.Keys;
+
+            foreach (var key in keys)
+            {
+                if (typesOfStones[key] == numberOfStones)
+                {
+                    gemstones++;
+                }
+            }
+
+            return gemstones;
+        }
+
+        public static int AlternatingCharacters(string s)
+        {
+            int counter = 0;
+
+            for (int i = 0; i < s.Length - 1; i++)
+            {
+                if (s[i] == s[i + 1])
+                {
+                    counter++;
+                }
+            }
+
+            return counter;
+        }
+
+        public static int BeautifulBinaryString(string b)
+        {
+            int counter = 0;
+            var allIndicesOfZeroes = new List<int>();
+
+            for (int i = b.IndexOf('0'); i > -1; i = b.IndexOf('0', i + 1))
+            {
+                allIndicesOfZeroes.Add(i);
+            }
+
+            for (int i = 0; i < allIndicesOfZeroes.Count; i++)
+            {
+                int currentIndex = allIndicesOfZeroes[i];
+
+                if (currentIndex < b.Length - 2 && b[currentIndex] == '0' && b[currentIndex + 1] == '1' && b[currentIndex + 2] == '0')
+                {
+                    StringBuilder sb = new StringBuilder(b);
+                    sb[currentIndex + 2] = '1';
+                    b = sb.ToString();
+                    counter++;
+                }
+            }
+
+            return counter;
+        }
+
+        public static int TheLoveLetterMystery(string s)
+        {
+            int counter = 0;
+            int middleIndex = s.Length / 2;
+            string firstHalf = String.Empty;
+            string secondHalf = String.Empty;
+
+            if (s.Length % 2 == 0)
+            {
+                firstHalf = s.Substring(0, middleIndex);
+                secondHalf = s.Substring(middleIndex);
+            }
+            else
+            {
+                firstHalf = s.Substring(0, middleIndex);
+                secondHalf = s.Substring(middleIndex + 1);
+            }
+
+            for (int i = 0; i < firstHalf.Length; i++)
+            {
+                counter += Math.Abs((int)firstHalf[i] - (int)secondHalf[secondHalf.Length - i - 1]);
+            }
+
+            return counter;
+        }
+
+        public static int PalindromeIndex(string s)
+        {
+            int index = -1;
+            int middleIndex = s.Length / 2;
+            string firstHalf = String.Empty;
+            string secondHalf = String.Empty;
+
+            if (_IsPalindrome(s))
+            {
+                return index;
+            }
+
+            firstHalf = s.Substring(0, middleIndex);
+            secondHalf = s.Substring(middleIndex);
+
+            for (int i = 0; i < firstHalf.Length; i++)
+            {
+                if (firstHalf[i] != secondHalf[secondHalf.Length - i - 1])
+                {
+                    string testFirstHalf = firstHalf.Remove(i, 1);
+                    string testSecondHalf = secondHalf.Remove(secondHalf.Length - i - 1, 1);
+
+                    string resultFirstHalf = testFirstHalf + secondHalf;
+                    string resultSecondHalf = firstHalf + testSecondHalf;
+
+                    if (_IsPalindrome(resultFirstHalf))
+                    {
+                        return i;
+                    }
+                    else if (_IsPalindrome(resultSecondHalf))
+                    {
+                        return s.Length - i - 1;
+                    }
+                    else
+                    {
+                        return index;
+                    }
+                }
+            }
+
+            return index;
+        }
+
+        public static bool _IsPalindrome(string s)
+        {
+            int middleIndex = s.Length / 2;
+            string firstHalf = String.Empty;
+            string secondHalf = String.Empty;
+
+            if (s.Length % 2 == 0)
+            {
+                firstHalf = s.Substring(0, middleIndex);
+                secondHalf = s.Substring(middleIndex);
+            }
+            else
+            {
+                firstHalf = s.Substring(0, middleIndex);
+                secondHalf = s.Substring(middleIndex + 1);
+            }
+
+            for (int i = 0; i < firstHalf.Length; i++)
+            {
+                if (firstHalf[i] != secondHalf[secondHalf.Length - i - 1])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }
