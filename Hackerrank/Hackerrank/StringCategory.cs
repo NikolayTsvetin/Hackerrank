@@ -417,5 +417,25 @@ namespace Hackerrank
 
             return "NO";
         }
+
+        public static int StringConstruction(string s)
+        {
+            int counter = 0;
+            List<char> copied = new List<char>();
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                char currentLetter = s[i];
+
+                if (copied.IndexOf(currentLetter) < 0)
+                {
+                    counter++;
+                }
+
+                copied.Add(currentLetter);
+            }
+
+            return counter;
+        }
     }
 }
