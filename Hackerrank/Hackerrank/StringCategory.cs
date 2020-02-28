@@ -498,5 +498,69 @@ namespace Hackerrank
 
             return currentLetter;
         }
+
+        public static string GameOfThrones(string s)
+        {
+            if (_IsPalindromePossible(s))
+            {
+                return "YES";
+            }
+
+            return "NO";
+        }
+
+        private static bool _IsPalindromePossible(string s)
+        {
+            int middleIndex = s.Length / 2;
+            string firstHalf = String.Empty;
+            string secondHalf = String.Empty;
+            Dictionary<char, int> countOfLetters = new Dictionary<char, int>();
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (!countOfLetters.ContainsKey(s[i]))
+                {
+                    countOfLetters.Add(s[i], 1);
+                }
+                else
+                {
+                    countOfLetters[s[i]] = countOfLetters[s[i]] + 1;
+                }
+            }
+
+            var keys = countOfLetters.Keys;
+
+            if (s.Length % 2 == 0)
+            {
+                foreach (var key in keys)
+                {
+                    if (countOfLetters[key] % 2 != 0)
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+            else
+            {
+                int counter = 0;
+
+                foreach (var key in keys)
+                {
+                    if (countOfLetters[key] % 2 != 0)
+                    {
+                        counter++;
+                    }
+                }
+
+                if (counter > 1)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+        }
     }
 }
