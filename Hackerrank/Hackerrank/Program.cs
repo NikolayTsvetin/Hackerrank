@@ -17,7 +17,7 @@ namespace Hackerrank
             List<int> numbers2 = new List<int>() { 5, 2, 8 };
             string[] topics = new string[] { "abcdde", "baccd", "eeabg" };
 
-            StringCategory.Anagram("aaabbb");
+            StringCategory.CaesarCipher("w", 5);
         }
     }
 }

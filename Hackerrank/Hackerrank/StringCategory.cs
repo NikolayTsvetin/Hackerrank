@@ -437,5 +437,66 @@ namespace Hackerrank
 
             return counter;
         }
+
+        public static string CaesarCipher(string s, int k)
+        {
+            StringBuilder encrypted = new StringBuilder();
+            int step = k;
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                char currentLetter = s[i];
+                step = k;
+
+                if (currentLetter >= 65 && currentLetter <= 90)
+                {
+                    if (currentLetter + k > 90)
+                    {
+                        char modifiedLetter = _ModifyLetter(currentLetter, k, 65, 90);
+
+                        encrypted.Append(modifiedLetter);
+                    }
+                    else
+                    {
+                        encrypted.Append((char)(currentLetter + k));
+                    }
+                }
+                else if (currentLetter >= 97 && currentLetter <= 122)
+                {
+                    if (currentLetter + k > 122)
+                    {
+                        char modifiedLetter = _ModifyLetter(currentLetter, k, 97, 122);
+
+                        encrypted.Append(modifiedLetter);
+                    }
+                    else
+                    {
+                        encrypted.Append((char)(currentLetter + k));
+                    }
+                }
+                else
+                {
+                    encrypted.Append(currentLetter);
+                }
+            }
+
+            return encrypted.ToString();
+        }
+
+        private static char _ModifyLetter(char currentLetter, int k, int lowerBound, int upperBound)
+        {
+            while (k > 0)
+            {
+                if (currentLetter == upperBound)
+                {
+                    currentLetter = (char)(lowerBound - 1);
+                }
+
+                currentLetter++;
+                k--;
+            }
+
+            return currentLetter;
+        }
     }
 }
