@@ -562,5 +562,169 @@ namespace Hackerrank
                 return true;
             }
         }
+
+        public static int MakingAnagrams(string s1, string s2)
+        {
+            int counter = 0;
+            Dictionary<char, int> countOfLettersInFirstString = new Dictionary<char, int>();
+            Dictionary<char, int> countOfLettersInSecondString = new Dictionary<char, int>();
+
+            for (int i = 0; i < s1.Length; i++)
+            {
+                if (!countOfLettersInFirstString.ContainsKey(s1[i]))
+                {
+                    countOfLettersInFirstString.Add(s1[i], 1);
+                }
+                else
+                {
+                    countOfLettersInFirstString[s1[i]] = countOfLettersInFirstString[s1[i]] + 1;
+                }
+            }
+
+            for (int i = 0; i < s2.Length; i++)
+            {
+                if (!countOfLettersInSecondString.ContainsKey(s2[i]))
+                {
+                    countOfLettersInSecondString.Add(s2[i], 1);
+                }
+                else
+                {
+                    countOfLettersInSecondString[s2[i]] = countOfLettersInSecondString[s2[i]] + 1;
+                }
+            }
+
+            var firstStingKeys = countOfLettersInFirstString.Keys;
+            var secondStringKeys = countOfLettersInSecondString.Keys;
+            var allKeys = new List<char>();
+            allKeys.AddRange(firstStingKeys);
+            allKeys.AddRange(secondStringKeys);
+
+            var keysInBothStrings = allKeys.Where(key => countOfLettersInFirstString.ContainsKey(key) && countOfLettersInSecondString.ContainsKey(key)).Distinct();
+            var differentKeys = allKeys.Where(key => (countOfLettersInFirstString.ContainsKey(key) && !countOfLettersInSecondString.ContainsKey(key))
+                                        || !countOfLettersInFirstString.ContainsKey(key) && countOfLettersInSecondString.ContainsKey(key));
+
+            foreach (var sameKey in keysInBothStrings)
+            {
+                counter += Math.Abs(countOfLettersInFirstString[sameKey] - countOfLettersInSecondString[sameKey]);
+            }
+
+            foreach (var diffKey in differentKeys)
+            {
+                if (countOfLettersInFirstString.ContainsKey(diffKey))
+                {
+                    counter += countOfLettersInFirstString[diffKey];
+                }
+                else
+                {
+                    counter += countOfLettersInSecondString[diffKey];
+                }
+            }
+
+            return counter;
+        }
+
+        public static int Alternate(string s)
+        {
+            Dictionary<char, int> countOfLettersInString = new Dictionary<char, int>();
+            int maxLength = 0;
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (!countOfLettersInString.ContainsKey(s[i]))
+                {
+                    countOfLettersInString.Add(s[i], 1);
+                }
+                else
+                {
+                    countOfLettersInString[s[i]] = countOfLettersInString[s[i]] + 1;
+                }
+            }
+
+            var keys = countOfLettersInString.Keys.ToList();
+
+            // Awful
+            for (int i = 0; i < keys.Count; i++)
+            {
+                var currentKey = keys[i];
+
+                for (int j = i + 1; j < keys.Count; j++)
+                {
+                    StringBuilder result = new StringBuilder();
+
+                    for (int k = 0; k < s.Length; k++)
+                    {
+                        if (s[k] == currentKey || s[k] == keys[j])
+                        {
+                            result.Append(s[k]);
+                        }
+                    }
+
+                    if (_IsValidStringWithAlternatingChars(result.ToString()))
+                    {
+                        if (result.ToString().Length > maxLength)
+                        {
+                            maxLength = result.ToString().Length;
+                        }
+                    }
+                }
+            }
+
+            return maxLength;
+        }
+
+        private static bool _IsValidStringWithAlternatingChars(string str)
+        {
+            for (int i = 1; i < str.Length; i++)
+            {
+                char letter = str[i - 1];
+
+                if (str[i] == letter)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public static string[] WeightedUniformStrings(string s, int[] queries)
+        {
+            HashSet<int> availableWeights = new HashSet<int>();
+            char currentLetter = s[0];
+            // first letter is 'a' which has 97 charCode.
+            int counter = currentLetter - 96;
+            availableWeights.Add(counter);
+
+            for (int i = 1; i < s.Length; i++)
+            {
+                if (s[i] == currentLetter)
+                {
+                    counter += (s[i] - 96);
+                    availableWeights.Add(counter);
+                }
+                else
+                {
+                    currentLetter = s[i];
+                    counter = (s[i] - 96);
+                    availableWeights.Add(counter);
+                }
+            }
+
+            List<string> results = new List<string>();
+
+            for (int query = 0; query < queries.Length; query++)
+            {
+                if (availableWeights.Contains(queries[query]))
+                {
+                    results.Add("Yes");
+                }
+                else
+                {
+                    results.Add("No");
+                }
+            }
+
+            return results.ToArray();
+        }
     }
 }
