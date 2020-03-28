@@ -172,5 +172,119 @@ namespace Hackerrank
 
             return counter;
         }
+
+        // Part one - partition
+        public static int[] QuickSort(int[] arr)
+        {
+            int pivot = arr[0];
+            List<int> left = new List<int>();
+            List<int> equal = new List<int>();
+            List<int> right = new List<int>();
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] < pivot)
+                {
+                    left.Add(arr[i]);
+                }
+                else if (arr[i] == pivot)
+                {
+                    equal.Add(arr[i]);
+                }
+                else
+                {
+                    right.Add(arr[i]);
+                }
+            }
+
+            List<int> result = new List<int>();
+
+            result.AddRange(left);
+            result.AddRange(equal);
+            result.AddRange(right);
+
+            return result.ToArray();
+        }
+
+        // Part one - count elements
+        public static int[] CountingSort(int[] arr)
+        {
+            // max number is arr is 100.
+            int[] count = new int[100];
+            int[] result = new int[arr.Length];
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                count[arr[i]]++;
+            }
+
+            return count;
+        }
+
+        //  Part two - sort
+        public static int[] CountingSort2(int[] arr)
+        {
+            // max number is arr is 100.
+            int[] count = new int[100];
+            int[] result = new int[arr.Length];
+            int k = 0;
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                count[arr[i]]++;
+            }
+
+            for (int i = 0; i < count.Length; i++)
+            {
+                if (count[i] > 0)
+                {
+                    for (int j = 0; j < count[i]; j++)
+                    {
+                        result[k] = i;
+                        k++;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public static int[] ClosestNumbers(int[] arr)
+        {
+            Array.Sort(arr);
+            int minDifference = Int32.MaxValue;
+            List<int> result = new List<int>();
+
+            for (int i = 1; i < arr.Length; i++)
+            {
+                int diff = Math.Abs(arr[i] - arr[i - 1]);
+
+                if (diff < minDifference)
+                {
+                    minDifference = diff;
+                }
+            }
+
+            for (int i = 1; i < arr.Length; i++)
+            {
+                int diff = Math.Abs(arr[i] - arr[i - 1]);
+
+                if (diff == minDifference)
+                {
+                    result.Add(arr[i - 1]);
+                    result.Add(arr[i]);
+                }
+            }
+
+            return result.ToArray();
+        }
+
+        // wtf ?!?! :D
+        public static int FindMedian(int[] arr)
+        {
+            Array.Sort(arr);
+
+            return arr[arr.Length / 2];
+        }
     }
 }
