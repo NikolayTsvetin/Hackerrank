@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hackerrank
 {
-    public static class StringCategory
+    public static class Strings
     {
         public static string SuperReducedString(string s)
         {
