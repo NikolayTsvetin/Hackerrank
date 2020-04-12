@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Arrays.cs" />
     <Compile Include="Implementation.cs" />
+    <Compile Include="LinkedLists.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Search.cs" />
