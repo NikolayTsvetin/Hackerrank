@@ -6,3 +6,4 @@
 * [Sorting](https://github.com/NikolayTsvetin/Hackerrank/blob/master/Hackerrank/Hackerrank/Sorting.cs)
 * [Search](https://github.com/NikolayTsvetin/Hackerrank/blob/master/Hackerrank/Hackerrank/Search.cs)
 * [Arrays](https://github.com/NikolayTsvetin/Hackerrank/blob/master/Hackerrank/Hackerrank/Arrays.cs)
+* [Linked Lists](https://github.com/NikolayTsvetin/Hackerrank/blob/master/Hackerrank/Hackerrank/LinkedLists.cs)
