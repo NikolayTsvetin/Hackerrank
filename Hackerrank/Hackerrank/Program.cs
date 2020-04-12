@@ -15,9 +15,10 @@ namespace Hackerrank
             int[] arr2 = new int[] { 3, 1, 2 };
             List<int> numbers = new List<int>() { 2, 2, 3, 4, 5 };
             List<int> numbers2 = new List<int>() { 5, 2, 8 };
-            string[] topics = new string[] { "abcdde", "baccd", "eeabg" };
+            string[] strings = new string[] { "aba", "baba", "aba", "xzxb" };
+            string[] queries = new string[] { "aba", "xzxb", "ab" };
 
-            Sorting.CountingSort2(arr);
+            Arrays.MatchingStrings(strings, queries);
         }
     }
 }
