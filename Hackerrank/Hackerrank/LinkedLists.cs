@@ -292,12 +292,144 @@ namespace Hackerrank
 
         public static DoublyLinkedListNode Reverse(DoublyLinkedListNode head)
         {
-            throw new NotImplementedException("TODO");
+            if (head == null)
+            {
+                return head;
+            }
+
+            Stack<DoublyLinkedListNode> nodes = new Stack<DoublyLinkedListNode>();
+            DoublyLinkedListNode currentEl = head;
+            DoublyLinkedListNode temp = null;
+
+            while (currentEl != null)
+            {
+                temp = currentEl.prev;
+                DoublyLinkedListNode nextElement = currentEl.next;
+                currentEl.prev = nextElement;
+                currentEl.next = temp;
+
+                currentEl = currentEl.prev;
+            }
+
+            DoublyLinkedListNode headToReturn = head;
+
+            while (headToReturn.prev != null)
+            {
+                headToReturn = headToReturn.prev;
+            }
+
+            return headToReturn;
         }
 
         public static bool HasCycle(SinglyLinkedListNode head)
         {
-            throw new NotImplementedException("TODO");
+            Dictionary<SinglyLinkedListNode, int> traversedNodes = new Dictionary<SinglyLinkedListNode, int>();
+            SinglyLinkedListNode currentEl = head;
+
+            if (head == null || head.next == null)
+            {
+                return false;
+            }
+
+            while (currentEl != null)
+            {
+                if (traversedNodes.ContainsKey(currentEl))
+                {
+                    if (traversedNodes[currentEl] == currentEl.data)
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    traversedNodes.Add(currentEl, currentEl.data);
+                }
+
+                currentEl = currentEl.next;
+            }
+
+            return false;
+        }
+
+        public static SinglyLinkedListNode MergeLists(SinglyLinkedListNode head1, SinglyLinkedListNode head2)
+        {
+            // edge cases
+            if (head1 == null && head2 == null)
+            {
+                return null;
+            }
+            else if (head1 == null || head2 == null)
+            {
+                return head1 == null ? head2 : head1;
+            }
+            // end of edge cases
+
+            SinglyLinkedListNode currentEl = null;
+
+            if (head1.data < head2.data)
+            {
+                currentEl = head1;
+                head1 = head1.next;
+            }
+            else
+            {
+                currentEl = head2;
+                head2 = head2.next;
+            }
+
+            SinglyLinkedListNode helper = currentEl;
+
+            while (head1 != null && head2 != null)
+            {
+                if (head1.data < head2.data)
+                {
+                    helper.next = head1;
+                    head1 = head1.next;
+                }
+                else
+                {
+                    helper.next = head2;
+                    head2 = head2.next;
+                }
+
+                helper = helper.next;
+            }
+
+            if (head1 == null || head2 == null)
+            {
+                helper.next = (head1 == null ? head2 : head1);
+            }
+
+            return currentEl;
+        }
+
+        public static SinglyLinkedListNode RemoveDuplicates(SinglyLinkedListNode head)
+        {
+            if (head == null)
+            {
+                return null;
+            }
+
+            SinglyLinkedListNode currentEl = head;
+
+            while (currentEl.next != null)
+            {
+                if (currentEl.next.data == currentEl.data)
+                {
+                    currentEl.next = currentEl.next.next;
+                }
+                else
+                {
+                    currentEl = currentEl.next;
+                }
+            }
+
+            return head;
+        }
+
+        public static int FindMergeNode(SinglyLinkedListNode headA, SinglyLinkedListNode headB)
+        {
+            throw new NotImplementedException("TODO when hackerrank fix the input and make it understandable.");
         }
     }
 }

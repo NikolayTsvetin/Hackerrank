@@ -11,18 +11,28 @@ namespace Hackerrank
     {
         static void Main(string[] args)
         {
-            SinglyLinkedListNode head = new SinglyLinkedListNode(5);
-            var x = head;
-            int i = 4;
+            SinglyLinkedListNode head1 = new SinglyLinkedListNode(1);
+            head1.next = new SinglyLinkedListNode(1);
+            head1.next.next = new SinglyLinkedListNode(3);
 
-            while (i > 0)
+            SinglyLinkedListNode head2 = new SinglyLinkedListNode(1);
+            var y = head2;
+            int j = 2;
+
+            while (j < 4)
             {
-                x.next = new SinglyLinkedListNode(i);
-                i--;
-                x = x.next;
+                //if (j != 2 && j != 5 && j != 11)
+                //{
+                //    j++;
+                //    continue;
+                //}
+
+                y.next = new SinglyLinkedListNode(j);
+                j++;
+                y = y.next;
             }
 
-            LinkedLists.InsertNodeAtPosition(head, 1000, 3);
+            LinkedLists.FindMergeNode(head1, head2);
         }
     }
 }

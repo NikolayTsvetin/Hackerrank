@@ -52,6 +52,7 @@
     <Compile Include="Search.cs" />
     <Compile Include="Sorting.cs" />
     <Compile Include="Strings.cs" />
+    <Compile Include="Trees.cs" />
     <Compile Include="Warmup.cs" />
   </ItemGroup>
   <ItemGroup>
