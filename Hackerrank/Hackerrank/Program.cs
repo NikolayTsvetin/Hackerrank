@@ -11,28 +11,10 @@ namespace Hackerrank
     {
         static void Main(string[] args)
         {
-            SinglyLinkedListNode head1 = new SinglyLinkedListNode(1);
-            head1.next = new SinglyLinkedListNode(1);
-            head1.next.next = new SinglyLinkedListNode(3);
+            int[] scores = new int[] { 100, 100, 50, 40, 40, 20, 10 };
+            int[] aliceScores = new int[] { 5, 25, 50, 120 };
 
-            SinglyLinkedListNode head2 = new SinglyLinkedListNode(1);
-            var y = head2;
-            int j = 2;
-
-            while (j < 4)
-            {
-                //if (j != 2 && j != 5 && j != 11)
-                //{
-                //    j++;
-                //    continue;
-                //}
-
-                y.next = new SinglyLinkedListNode(j);
-                j++;
-                y = y.next;
-            }
-
-            LinkedLists.FindMergeNode(head1, head2);
+            Implementation.ClimbingLeaderboard(/*scores, aliceScores*/test, test2);
         }
     }
 }

@@ -1309,5 +1309,56 @@ namespace Hackerrank
                 return "YES";
             }
         }
+
+        public static int[] ClimbingLeaderboard(int[] scores, int[] alice)
+        {
+            int[] result = new int[alice.Length];
+            List<int> distinctScores = scores.Distinct().ToList();
+            int lastVisitedIndex = distinctScores.Count - 1;
+
+            for (int i = 0; i < alice.Length; i++)
+            {
+                int currentScore = alice[i];
+
+                if (currentScore >= distinctScores[0])
+                {
+                    result[i] = 1;
+                    continue;
+                }
+
+                if (currentScore <= distinctScores[distinctScores.Count - 1])
+                {
+                    // edge case for equal numbers
+                    if (currentScore == distinctScores[distinctScores.Count - 1])
+                    {
+                        result[i] = distinctScores.Count;
+                        continue;
+                    }
+
+                    result[i] = distinctScores.Count + 1;
+                    continue;
+                }
+
+                for (int j = lastVisitedIndex; j > 0; j--)
+                {
+                    if (currentScore >= distinctScores[j] && currentScore <= distinctScores[j - 1])
+                    {
+                        // edge case for equal numbers
+                        if (currentScore == distinctScores[j - 1])
+                        {
+                            result[i] = j;
+                            lastVisitedIndex = j;
+                            break;
+                        }
+
+                        result[i] = j + 1;
+                        lastVisitedIndex = j;
+                        break;
+                    }
+                }
+            }
+
+            return result;
+        }
     }
 }
