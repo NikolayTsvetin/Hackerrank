@@ -100,5 +100,35 @@ namespace Hackerrank
 
             return "NO";
         }
+
+        public static int Pairs(int k, int[] arr)
+        {
+            int i = 0;
+            int j = 1;
+            int count = 0;
+
+            Array.Sort(arr);
+
+            while (j < arr.Length)
+            {
+                int diff = arr[j] - arr[i];
+
+                if (diff == k)
+                {
+                    count++;
+                    j++;
+                }
+                else if (diff > k)
+                {
+                    i++;
+                }
+                else if (diff < k)
+                {
+                    j++;
+                }
+            }
+
+            return count;
+        }
     }
 }

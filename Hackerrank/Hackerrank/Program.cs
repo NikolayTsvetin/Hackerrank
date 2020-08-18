@@ -11,10 +11,9 @@ namespace Hackerrank
     {
         static void Main(string[] args)
         {
-            int[] scores = new int[] { 100, 100, 50, 40, 40, 20, 10 };
-            int[] aliceScores = new int[] { 5, 25, 50, 120 };
+            int[] arr = new int[5] { 1, 5, 3, 4, 2 };
 
-            Implementation.ClimbingLeaderboard(/*scores, aliceScores*/test, test2);
+            Search.Pairs(2, arr);
         }
     }
 }
