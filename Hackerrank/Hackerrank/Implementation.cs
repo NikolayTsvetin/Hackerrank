@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Hackerrank
@@ -1359,6 +1360,141 @@ namespace Hackerrank
             }
 
             return result;
+        }
+
+        private static List<int> AllIndexesOf(string str, string value)
+        {
+            List<int> indexes = new List<int>();
+            for (int index = 0; ; index += value.Length)
+            {
+                index = str.IndexOf(value, index);
+                if (index == -1)
+                    return indexes;
+                indexes.Add(index);
+            }
+        }
+
+        // Two solutions, both 3/16 test cases failed. Not great, not terrible.
+        public static string GridSearch(string[] G, string[] P)
+        {
+            int index = 0;
+            int indexOfPattern = -1;
+            bool firstMatch = false;
+            List<int> previousIndexes = new List<int>();
+
+            for (int i = 0; i < G.Length; i++)
+            {
+                bool invalid = true;
+                if (index >= P.Length)
+                {
+                    break;
+                }
+
+                string row = G[i];
+                var pattern = P[index];
+                List<int> matches = AllIndexesOf(row, pattern);
+
+                if (matches.Count > 0)
+                {
+                    if (!firstMatch)
+                    {
+                        firstMatch = true;
+
+                        foreach (var match in matches)
+                        {
+                            indexOfPattern = match;
+                            previousIndexes = matches;
+                        }
+                    }
+
+                    foreach (var m in matches)
+                    {
+                        if (indexOfPattern == m)
+                        {
+                            invalid = false;
+                        }
+                    }
+
+                    if (invalid)
+                    {
+                        index = 0;
+                        continue;
+                    }
+
+                    index++;
+                }
+                else
+                {
+                    if (index > 0 && G[i].IndexOf(P[index - 1]) >= 0)
+                    {
+                        previousIndexes = AllIndexesOf(G[i], P[index - 1]);
+                        indexOfPattern = previousIndexes[previousIndexes.Count - 1];//G[i].IndexOf(P[index - 1]);
+                        index = 1;
+                        continue;
+                    }
+
+                    index = 0;
+                }
+            }
+
+            if (index == P.Length)
+            {
+                return "YES";
+            }
+
+            return "NO";
+        }
+
+        // Optimize it. Working, but tests are failing due to timeout.
+        public static int NonDivisibleSubset(int k, List<int> s)
+        {
+            //s = s.Distinct().ToList();
+            int index = 0;
+            int max = -1;
+
+            while (index < s.Count)
+            {
+                int count = GenerateValidNumbersForNum(index, s, k);
+
+                if (count > max)
+                {
+                    max = count;
+                }
+
+                index++;
+            }
+
+            return max;
+        }
+
+        private static int GenerateValidNumbersForNum(int index, List<int> s, int k)
+        {
+            List<int> validNumbers = new List<int>() { s[index] };
+
+            for (int i = 0; i < s.Count; i++)
+            {
+                if (i == index) continue;
+
+                if (ShouldAddNumber(validNumbers, k, s[i]))
+                {
+                    validNumbers.Add(s[i]);
+                }
+            }
+
+            return validNumbers.Distinct().Count();
+        }
+
+        private static bool ShouldAddNumber(List<int> validNumbers, int k, int currentNumber)
+        {
+            foreach (var num in validNumbers)
+            {
+                if ((num + currentNumber) % k == 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

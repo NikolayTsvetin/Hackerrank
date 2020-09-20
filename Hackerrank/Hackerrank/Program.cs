@@ -11,9 +11,9 @@ namespace Hackerrank
     {
         static void Main(string[] args)
         {
-            int[] arr = new int[5] { 1, 5, 3, 4, 2 };
-
-            Search.Pairs(2, arr);
+           
         }
+        //List<int> list = "278 576 496 727 410 124 338 149 209 702 282 718 771 575 436".Split(' ').Select(x => int.Parse(x)).ToList();
+        //Implementation.NonDivisibleSubset(7, list);
     }
 }
