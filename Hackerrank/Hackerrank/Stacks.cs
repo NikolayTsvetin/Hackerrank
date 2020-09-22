@@ -103,5 +103,41 @@ namespace Hackerrank
                 return false;
             }
         }
+
+        public static void MaximumElementInStack(int numberOfQueries)
+        {
+            Stack<int> stack = new Stack<int>();
+
+            for (int i = 0; i < numberOfQueries; i++)
+            {
+                string[] query = Console.ReadLine().Split(' ');
+
+                if (int.Parse(query[0].ToString()) == 1)
+                {
+                    int elementToPush = int.Parse(query[1].ToString());
+
+                    if (stack.Count == 0)
+                    {
+                        stack.Push(elementToPush);
+                    }
+                    else
+                    {
+                        stack.Push(Math.Max(elementToPush, stack.Peek()));
+                    }
+                }
+                else if (int.Parse(query[0].ToString()) == 2)
+                {
+                    stack.Pop();
+                }
+                else if (int.Parse(query[0].ToString()) == 3)
+                {
+                    Console.WriteLine(stack.Peek());
+                }
+                else
+                {
+                    Console.WriteLine("Not a valid query.");
+                }
+            }
+        }
     }
 }
