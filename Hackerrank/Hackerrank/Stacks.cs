@@ -139,5 +139,56 @@ namespace Hackerrank
                 }
             }
         }
+
+        // Timeout - need to be optimized.
+        public static int EqualStacks(List<int> h1, List<int> h2, List<int> h3)
+        {
+            Stack<int> stack1 = CreateStackFromList(h1);
+            Stack<int> stack2 = CreateStackFromList(h2);
+            Stack<int> stack3 = CreateStackFromList(h3);
+
+            while (true)
+            {
+                if (StacksAreEqualHeight(stack1, stack2, stack3))
+                {
+                    return stack1.Sum();
+                }
+
+                int lowest = Math.Min(Math.Min(stack1.Sum(), stack2.Sum()), stack3.Sum());
+
+                stack1 = ReduceHeight(stack1, lowest);
+                stack2 = ReduceHeight(stack2, lowest);
+                stack3 = ReduceHeight(stack3, lowest);
+            }
+        }
+
+        private static Stack<int> CreateStackFromList(List<int> list)
+        {
+            Stack<int> result = new Stack<int>();
+
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                result.Push(list[i]);
+            }
+
+            return result;
+        }
+
+        private static bool StacksAreEqualHeight(Stack<int> stack1, Stack<int> stack2, Stack<int> stack3)
+        {
+            return stack1.Sum() == stack2.Sum() && stack1.Sum() == stack3.Sum();
+        }
+
+        private static Stack<int> ReduceHeight(Stack<int> stack, int lowest)
+        {
+            int currentHeight = stack.Sum();
+
+            while (currentHeight > lowest)
+            {
+                currentHeight -= stack.Pop();
+            }
+
+            return stack;
+        }
     }
 }
